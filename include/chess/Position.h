@@ -11,6 +11,15 @@ namespace chess {
         char getFileChar();
         char getRankChar();
         std::string toString();
+
+        bool operator==(const Position& other) const {
+            return file == other.file && rank == other.rank;
+        }
+        Position operator+(const Position& other) const {
+            return { file + other.file, rank + other.rank };
+        }
+
+        bool isWithinBounds() const;
     };
 }
 

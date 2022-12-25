@@ -4,65 +4,70 @@ namespace chess {
     Piece::Piece(PieceType _type, PieceColor _color) : type(_type), color(_color) {
     }
 
-    std::vector<Position> Piece::getMoves(Position from) {
-        std::vector<Position> moves;
-
-        return moves;
+    std::vector<Position> Piece::getPossibleEndPositions(Position from) {
+        std::vector<Position> endPositions;
+        for (Position relativePosition : getPossibleRelativeEndPositions(type, color)) {
+            Position endPosition = from + relativePosition;
+            if (endPosition.isWithinBounds())
+                endPositions.push_back(endPosition);
+        }
+        return endPositions;
     }
-    std::vector<Position> Piece::getMoves(PieceType type, PieceColor color) {
-        std::vector<Position> moves;
+
+    std::vector<Position> Piece::getPossibleRelativeEndPositions(PieceType type, PieceColor color) {
+        std::vector<Position> endPositions;
         using enum PieceType;
         if(type == KING)
-            moves = { {1,0}, {1,1}, {0,1}, {-1,0}, {-1,-1}, {0,-1}, {2,0}, {-2,0} }; //Last two moves symbolize castling.
+            endPositions = { {1,0}, {1,1}, {0,1}, {-1,0}, {-1,-1}, {0,-1}, {2,0}, {-2,0} }; //Last two moves symbolize castling.
         if (type == PAWN)
-            moves = Piece::getPawnMoves(color);
+            endPositions = Piece::getPawnPositions(color);
         if (type == KNIGHT)
-            moves = { {2,1}, {1,2}, {-2,1}, {1,-2}, {-2,-1}, {-1,-2}, {2,-1}, {-1,2} };
+            endPositions = { {2,1}, {1,2}, {-2,1}, {1,-2}, {-2,-1}, {-1,-2}, {2,-1}, {-1,2} };
         if (type == ROOK)
-            moves = Piece::getLineMoves();
+            endPositions = Piece::getLinePositions();
         if (type == BISHOP)
-            moves = Piece::getDiagonalMoves();
+            endPositions = Piece::getDiagonalPositions();
         if (type == QUEEN) {
-            moves = Piece::getLineMoves();
-            auto diagonalMoves = Piece::getDiagonalMoves();
-            moves.insert(moves.end(), diagonalMoves.begin(), diagonalMoves.end());
+            endPositions = Piece::getLinePositions();
+            auto diagonalMoves = Piece::getDiagonalPositions();
+            endPositions.insert(endPositions.end(), diagonalMoves.begin(), diagonalMoves.end());
         }
-        return moves;
+        return endPositions;
     }
 
-    std::vector<Position> Piece::getLineMoves() {
-        std::vector<Position> moves;
+    std::vector<Position> Piece::getLinePositions() {
+        std::vector<Position> positions;
         for (int i = 0; i < 8; i++) {
-            moves.push_back({ 0,i });
-            moves.push_back({ 0,-i });
-            moves.push_back({ i,0 });
-            moves.push_back({ -i,0 });
+            positions.push_back({ 0,i });
+            positions.push_back({ 0,-i });
+            positions.push_back({ i,0 });
+            positions.push_back({ -i,0 });
         }
-        return moves;
+        return positions;
     }
 
-    std::vector<Position> Piece::getDiagonalMoves() {
-        std::vector<Position> moves;
+    std::vector<Position> Piece::getDiagonalPositions() {
+        std::vector<Position> positions;
         for (int i = 0; i < 8; i++) {
-            moves.push_back({ i,i });
-            moves.push_back({ -i,-i });
-            moves.push_back({ i,-i });
-            moves.push_back({ -i,i });
+            positions.push_back({ i,i });
+            positions.push_back({ -i,-i });
+            positions.push_back({ i,-i });
+            positions.push_back({ -i,i });
         }
-        return moves;
+        return positions;
     }
 
-    std::vector<Position> Piece::getPawnMoves(PieceColor color) {
-        std::vector<Position> moves;
-        std::vector <Position> promoteMoves;
+    std::vector<Position> Piece::getPawnPositions(PieceColor color) {
+        std::vector<Position> positions;
+        std::vector <Position> promotePositions;
         if (color == PieceColor::WHITE)
-            moves = { {1,1}, {0,2}, {-1,1}, {0,1} };
+            positions = { {1,1}, {0,2}, {-1,1}, {0,1} };
         else
-            moves = { {1,-1}, {0,-2}, {-1,-1}, {0,-1} };
+            positions = { {1,-1}, {0,-2}, {-1,-1}, {0,-1} };
         for (int i = 3; i <= 6; i++)
-            promoteMoves = { {-1,i}, {1,i}, {0,i} };
-        moves.insert(moves.end(), promoteMoves.begin(), promoteMoves.end());
-        return moves;
+            promotePositions = { {-1,i}, {1,i}, {0,i} };
+        positions.insert(positions.end(), promotePositions.begin(), promotePositions.end());
+        return positions;
     }
 
 }

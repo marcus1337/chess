@@ -15,16 +15,16 @@ namespace chess {
 
     class Piece {
 
-        static std::vector<Position> getMoves(PieceType type, PieceColor color);
-        static std::vector<Position> getLineMoves();
-        static std::vector<Position> getDiagonalMoves();
-        static std::vector<Position> getPawnMoves(PieceColor color);
+        static std::vector<Position> getPossibleRelativeEndPositions(PieceType type, PieceColor color);
+        static std::vector<Position> getLinePositions();
+        static std::vector<Position> getDiagonalPositions();
+        static std::vector<Position> getPawnPositions(PieceColor color);
 
     public:
         const PieceType type;
         const PieceColor color;
         Piece(PieceType _type, PieceColor _color);
-        std::vector<Position> getMoves(Position from); //Also returns illegal moves.
+        std::vector<Position> getPossibleEndPositions(Position from); //Includes illegal moves.
     };
 }
 
