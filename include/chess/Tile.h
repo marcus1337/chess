@@ -2,16 +2,16 @@
 #ifndef TILE_H
 #define TILE_H
 
-#include "Position.h"
+#include "Point.h"
 
 namespace chess {
     class Tile {
 
-        const Position position;
+        const Point point;
 
     public:
 
-        Tile(Position _position);
+        Tile(Point _point);
 
     };
 }

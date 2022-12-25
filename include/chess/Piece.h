@@ -2,7 +2,7 @@
 #ifndef PIECE_H
 #define PIECE_H
 
-#include "chess/Position.h"
+#include "chess/Point.h"
 #include <vector>
 #include <map>
 #include <utility>
@@ -15,16 +15,16 @@ namespace chess {
 
     class Piece {
 
-        static std::vector<Position> getPossibleRelativeEndPositions(PieceType type, PieceColor color);
-        static std::vector<Position> getLinePositions();
-        static std::vector<Position> getDiagonalPositions();
-        static std::vector<Position> getPawnPositions(PieceColor color);
+        static std::vector<Point> getPossibleRelativeEndPoints(PieceType type, PieceColor color);
+        static std::vector<Point> getLinePoints();
+        static std::vector<Point> getDiagonalPoints();
+        static std::vector<Point> getPawnPoints(PieceColor color);
 
     public:
         const PieceType type;
         const PieceColor color;
         Piece(PieceType _type, PieceColor _color);
-        std::vector<Position> getPossibleEndPositions(Position from); //Includes illegal moves.
+        std::vector<Point> getPossibleEndPoints(Point from); //Includes illegal moves.
     };
 }
 

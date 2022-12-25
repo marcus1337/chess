@@ -4,39 +4,39 @@ namespace chess {
     Piece::Piece(PieceType _type, PieceColor _color) : type(_type), color(_color) {
     }
 
-    std::vector<Position> Piece::getPossibleEndPositions(Position from) {
-        std::vector<Position> endPositions;
-        for (Position relativePosition : getPossibleRelativeEndPositions(type, color)) {
-            Position endPosition = from + relativePosition;
+    std::vector<Point> Piece::getPossibleEndPoints(Point from) {
+        std::vector<Point> endPositions;
+        for (Point relativePosition : getPossibleRelativeEndPoints(type, color)) {
+            Point endPosition = from + relativePosition;
             if (endPosition.isWithinBounds())
                 endPositions.push_back(endPosition);
         }
         return endPositions;
     }
 
-    std::vector<Position> Piece::getPossibleRelativeEndPositions(PieceType type, PieceColor color) {
-        std::vector<Position> endPositions;
+    std::vector<Point> Piece::getPossibleRelativeEndPoints(PieceType type, PieceColor color) {
+        std::vector<Point> endPositions;
         using enum PieceType;
         if(type == KING)
             endPositions = { {1,0}, {1,1}, {0,1}, {-1,0}, {-1,-1}, {0,-1}, {2,0}, {-2,0} }; //Last two moves symbolize castling.
         if (type == PAWN)
-            endPositions = Piece::getPawnPositions(color);
+            endPositions = Piece::getPawnPoints(color);
         if (type == KNIGHT)
             endPositions = { {2,1}, {1,2}, {-2,1}, {1,-2}, {-2,-1}, {-1,-2}, {2,-1}, {-1,2} };
         if (type == ROOK)
-            endPositions = Piece::getLinePositions();
+            endPositions = Piece::getLinePoints();
         if (type == BISHOP)
-            endPositions = Piece::getDiagonalPositions();
+            endPositions = Piece::getDiagonalPoints();
         if (type == QUEEN) {
-            endPositions = Piece::getLinePositions();
-            auto diagonalMoves = Piece::getDiagonalPositions();
+            endPositions = Piece::getLinePoints();
+            auto diagonalMoves = Piece::getDiagonalPoints();
             endPositions.insert(endPositions.end(), diagonalMoves.begin(), diagonalMoves.end());
         }
         return endPositions;
     }
 
-    std::vector<Position> Piece::getLinePositions() {
-        std::vector<Position> positions;
+    std::vector<Point> Piece::getLinePoints() {
+        std::vector<Point> positions;
         for (int i = 0; i < 8; i++) {
             positions.push_back({ 0,i });
             positions.push_back({ 0,-i });
@@ -46,8 +46,8 @@ namespace chess {
         return positions;
     }
 
-    std::vector<Position> Piece::getDiagonalPositions() {
-        std::vector<Position> positions;
+    std::vector<Point> Piece::getDiagonalPoints() {
+        std::vector<Point> positions;
         for (int i = 0; i < 8; i++) {
             positions.push_back({ i,i });
             positions.push_back({ -i,-i });
@@ -57,9 +57,9 @@ namespace chess {
         return positions;
     }
 
-    std::vector<Position> Piece::getPawnPositions(PieceColor color) {
-        std::vector<Position> positions;
-        std::vector <Position> promotePositions;
+    std::vector<Point> Piece::getPawnPoints(PieceColor color) {
+        std::vector<Point> positions;
+        std::vector <Point> promotePositions;
         if (color == PieceColor::WHITE)
             positions = { {1,1}, {0,2}, {-1,1}, {0,1} };
         else

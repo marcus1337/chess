@@ -1,21 +1,21 @@
 
-#ifndef POSITION_H
-#define POSITION_H
-
+#ifndef CHESS_POINT_H
+#define CHESS_POINT_H
 #include <string>
 
 namespace chess {
-    struct Position {
+
+    struct Point {
         int file, rank;
 
         char getFileChar();
         char getRankChar();
         std::string toString();
 
-        bool operator==(const Position& other) const {
+        bool operator==(const Point& other) const {
             return file == other.file && rank == other.rank;
         }
-        Position operator+(const Position& other) const {
+        Point operator+(const Point& other) const {
             return { file + other.file, rank + other.rank };
         }
 

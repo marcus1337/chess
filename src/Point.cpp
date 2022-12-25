@@ -1,20 +1,20 @@
-#include "chess/Position.h"
+#include "chess/Point.h"
 
 namespace chess {
 
-    std::string Position::toString() {
+    std::string Point::toString() {
         return { getFileChar() , getRankChar() };
     }
 
-    char Position::getFileChar() {
+    char Point::getFileChar() {
         return 'a' + file;;
     }
 
-    char Position::getRankChar() {
+    char Point::getRankChar() {
         return '1' + rank;
     }
 
-    bool Position::isWithinBounds() const {
+    bool Point::isWithinBounds() const {
         return file >= 0 && file <= 7 && rank >= 0 && rank <= 7;
     }
 }
