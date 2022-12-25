@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.10)
 project(chesslib)
 set(CMAKE_CXX_STANDARD 20)
 
-add_library(${PROJECT_NAME} STATIC "src/chess.cpp" "include/chess/Tile.h" "src/Tile.cpp" "include/chess/Point.h" "src/Point.cpp" "include/chess/NotationInterpreter.h" "src/NotationInterpreter.cpp" "include/chess/Piece.h"  "src/Piece.cpp")
+add_library(${PROJECT_NAME} STATIC "src/chess.cpp" "src/Tile.cpp" "src/Point.cpp" "src/NotationInterpreter.cpp" "src/Piece.cpp" "src/Move.cpp")
 
 target_include_directories(${PROJECT_NAME}
   PUBLIC
