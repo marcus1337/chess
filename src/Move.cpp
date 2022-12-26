@@ -3,16 +3,6 @@
 
 namespace chess {
 
-    bool Move::shouldBePromotion() {
-        return fromPiece.getType() == PieceType::PAWN &&
-            ((fromPiece.getColor() == PieceColor::WHITE && to.rank == 7) ||
-                (fromPiece.getColor() == PieceColor::BLACK && to.rank == 0));
-    }
-
-    bool Move::isPromotion() {
-        return shouldBePromotion() && promotedTo != PieceType::PAWN && promotedTo != PieceType::KING;
-    }
-
     Move::Move(Point _from, Point _to, Piece _fromPiece) : Move(_from, _to, _fromPiece, PieceType::PAWN) {
     }
 
@@ -25,8 +15,21 @@ namespace chess {
     Move::Move(Point _from, Point _to, Piece _fromPiece, Piece _capturedPiece, PieceType _promotedTo) : from(_from), to(_to), fromPiece(_fromPiece), promotedTo(_promotedTo), capturedPiece(_capturedPiece) {
     }
 
+    bool Move::shouldBePromotion() {
+        return fromPiece.getType() == PieceType::PAWN &&
+            ((fromPiece.getColor() == PieceColor::WHITE && to.rank == 7) ||
+                (fromPiece.getColor() == PieceColor::BLACK && to.rank == 0));
+    }
+
+    bool Move::isPromotion() {
+        return shouldBePromotion() && promotedTo != PieceType::PAWN && promotedTo != PieceType::KING;
+    }
+
     std::vector<Move> Move::getPromoteMoves(Move pawnMove) {
-        return {};
+        return {Move(from, to, fromPiece, capturedPiece, PieceType::KNIGHT),
+            Move(from, to, fromPiece, capturedPiece, PieceType::BISHOP),
+            Move(from, to, fromPiece, capturedPiece, PieceType::ROOK),
+            Move(from, to, fromPiece, capturedPiece, PieceType::QUEEN)};
     }
 
     bool Move::isCapture() {
