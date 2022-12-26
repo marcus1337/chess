@@ -67,4 +67,9 @@ namespace chess {
     Piece Move::getPromotePiece() {
         return Piece(promotedTo, fromPiece.getColor());
     }
+
+    bool Move::isEnPassant() {
+        return fromPiece.getType() == PieceType::PAWN && from.file != to.file && !isCapture();
+    }
+
 }

@@ -25,7 +25,8 @@ namespace chess {
         bool isCapture();
         bool isCastle();
         bool isKingSideCastle();
-        bool isQueenSideCastle();        
+        bool isQueenSideCastle();     
+        bool isEnPassant();
         Point getFrom();
         Point getTo();
         Piece getFromPiece();
