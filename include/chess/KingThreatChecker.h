@@ -17,7 +17,7 @@ namespace chess {
         std::vector<Tile> getLongRangeThreatTiles();
 
     public:
-        KingThreatChecker(Board& _board, PieceColor& _kingColor);
+        KingThreatChecker(const Board& _board, PieceColor _kingColor);
         bool isKingChecked();
         bool isPointChecked(Point point);
         bool isPointBlockingCheck(Point point);

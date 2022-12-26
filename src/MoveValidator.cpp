@@ -2,12 +2,13 @@
 
 namespace chess {
 
-    MoveValidator::MoveValidator(const Board& _board, const std::vector<Move>& _moveHistory) : board(_board), moveHistory(_moveHistory), whiteToMove(moveHistory.size() % 2) {
+    MoveValidator::MoveValidator(const Board& _board, const std::vector<Move>& _moveHistory) : board(_board), moveHistory(_moveHistory), 
+        turnColor((moveHistory.size() % 2) == 0 ? PieceColor::WHITE : PieceColor::BLACK), kingThreatChecker(_board, turnColor) {
 
     }
 
     bool MoveValidator::isValidMove(const Move& move) {
-        if (move.getFromPiece().getColor() == PieceColor::WHITE && !whiteToMove)
+        if (move.getFromPiece().getColor() != turnColor)
             return false;
 
  

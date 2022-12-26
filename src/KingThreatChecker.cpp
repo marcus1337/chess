@@ -2,7 +2,7 @@
 #include "chess/MoveGenerator.h"
 
 namespace chess {
-    KingThreatChecker::KingThreatChecker(Board& _board, PieceColor& _kingColor) : board(_board), kingColor(_kingColor), checkedPoints{}, checkBlockingPoints{}, 
+    KingThreatChecker::KingThreatChecker(const Board& _board, PieceColor _kingColor) : board(_board), kingColor(_kingColor), checkedPoints{}, checkBlockingPoints{}, 
         attackColor(_kingColor == PieceColor::WHITE ? PieceColor::BLACK : PieceColor::WHITE) {
         setCheckedPoints();
         setBlockingCheckPoints();

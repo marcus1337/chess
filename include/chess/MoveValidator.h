@@ -4,17 +4,18 @@
 
 #include "Move.h"
 #include "Board.h"
+#include "KingThreatChecker.h"
 
 namespace chess {
     class MoveValidator {
         const Board& board;
         const std::vector<Move>& moveHistory;
-        const bool whiteToMove;
+        const PieceColor turnColor;
+        KingThreatChecker kingThreatChecker;
 
         bool canPassantTake(int toFile);
         bool canKingSideCastle();
         bool canQueenSideCastle();
-        bool isBlockingSelfCheck(Point from);
 
     std::vector<Move> getValidPromoteMoves(Move possibleMove);
 
