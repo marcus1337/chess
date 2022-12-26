@@ -1,4 +1,6 @@
 #include "chess/Board.h"
+#include <algorithm>
+#include <iterator>
 
 namespace chess {
 
@@ -77,6 +79,21 @@ namespace chess {
 
     void Board::setPiece(int file, int rank, Piece piece) {
         setPiece(Point{ file, rank }, piece);
+    }
+
+    Point Board::getKingPoint(PieceColor kingColor) const {
+        for (const Tile& tile : getOccupiedTiles(kingColor)) {
+            if (tile.getPiece().getType() == PieceType::KING)
+                return tile.getPoint();
+        }
+        return Point{-1, -1};
+    }
+
+    std::vector<Tile> Board::getOccupiedTiles(PieceColor pieceColor) const {
+        std::vector<Tile> occupiedTiles;
+        std::copy_if(tiles.begin(), tiles.end(), std::back_inserter(occupiedTiles),
+            [pieceColor](const Tile& tile) { return tile.isOccupied() && tile.getPiece().getColor() == pieceColor; });
+        return occupiedTiles;
     }
 
 }

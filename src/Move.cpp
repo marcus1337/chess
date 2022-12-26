@@ -72,4 +72,8 @@ namespace chess {
         return fromPiece.getType() == PieceType::PAWN && from.file != to.file && !isCapture();
     }
 
+    bool Move::isPawnPush() const {
+        return fromPiece.getType() == PieceType::PAWN && from.file == to.file;
+    }
+
 }

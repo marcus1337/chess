@@ -11,7 +11,7 @@ namespace chess {
         const std::vector<Move>& moveHistory;
         const bool whiteToMove;
 
-        bool canPassantTake(int file);
+        bool canPassantTake(int toFile);
         bool canKingSideCastle();
         bool canQueenSideCastle();
         bool isBlockingSelfCheck(Point from);

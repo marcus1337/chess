@@ -22,6 +22,8 @@ namespace chess {
         Tile getTile(int file, int rank) const;
         void setPiece(Point point, Piece piece);
         void setPiece(int file, int rank, Piece piece);
+        Point getKingPoint(PieceColor kingColor) const;
+        std::vector<Tile> getOccupiedTiles(PieceColor pieceColor) const;
     };
 }
 

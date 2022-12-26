@@ -10,11 +10,17 @@ namespace chess {
         Piece fromPiece = fromTile.getPiece();
         if (toTile.isOccupied() && toTile.getPiece().getColor() == fromPiece.getColor())
             return true;
+
+        Point from = fromTile.getPoint();
+        Point to = toTile.getPoint();
+        if (fromPiece.getType() == PieceType::PAWN && from.file == to.file && toTile.isOccupied()) {
+            return true;
+        }
+
         if (fromPiece.getType() != PieceType::KNIGHT) {
             Point midPoint = fromTile.getPoint();
-            Point toPoint = toTile.getPoint();
-            while (midPoint != toPoint) {
-                midPoint.stepTowards(toPoint);
+            while (midPoint != to) {
+                midPoint.stepTowards(to);
                 if (board.getTile(midPoint).isOccupied())
                     return true;
             }

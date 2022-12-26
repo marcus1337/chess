@@ -27,6 +27,7 @@ namespace chess {
         bool isKingSideCastle() const;
         bool isQueenSideCastle() const;     
         bool isEnPassant() const;
+        bool isPawnPush() const;
         Point getFrom() const;
         Point getTo() const;
         Piece getFromPiece() const;
