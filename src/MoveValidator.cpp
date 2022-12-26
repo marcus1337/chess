@@ -6,8 +6,11 @@ namespace chess {
 
     }
 
-    bool MoveValidator::isValidMove(const Move& possibleMove) {
+    bool MoveValidator::isValidMove(const Move& move) {
+        if (move.getFromPiece().getColor() == PieceColor::WHITE && !whiteToMove)
+            return false;
 
+ 
         return false;
     }
 
