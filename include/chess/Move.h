@@ -19,19 +19,19 @@ namespace chess {
         Move(Point _from, Point _to, Piece _fromPiece);
         Move(Point _from, Point _to, Piece _fromPiece, Piece _capturedPiece);
         
-        std::vector<Move> getPromoteMoves();
-        bool shouldBePromotion();
-        bool isPromotion();
-        bool isCapture();
-        bool isCastle();
-        bool isKingSideCastle();
-        bool isQueenSideCastle();     
-        bool isEnPassant();
-        Point getFrom();
-        Point getTo();
-        Piece getFromPiece();
-        Piece getCapturedPiece();
-        Piece getPromotePiece();
+        std::vector<Move> getPromoteMoves() const;
+        bool shouldBePromotion() const;
+        bool isPromotion() const;
+        bool isCapture() const;
+        bool isCastle() const;
+        bool isKingSideCastle() const;
+        bool isQueenSideCastle() const;     
+        bool isEnPassant() const;
+        Point getFrom() const;
+        Point getTo() const;
+        Piece getFromPiece() const;
+        Piece getCapturedPiece() const;
+        Piece getPromotePiece() const;
 
     };
 }
