@@ -2,10 +2,14 @@
 
 namespace chess {
 
-    Board BoardUpdater::previewMove(Move move) {
+    Board BoardUpdater::previewMove(Move move) const {
         Board boardCopy = board;
         applyMoveToBoard(move, boardCopy);
         return boardCopy;
+    }
+
+    Board BoardUpdater::getBoard() const {
+        return board;
     }
 
     void BoardUpdater::applyMoveToBoard(Move move, Board& board) {
@@ -55,7 +59,7 @@ namespace chess {
         return history;
     }
 
-    PieceColor BoardUpdater::getTurnColor() {
+    PieceColor BoardUpdater::getTurnColor() const {
         if (history.size() % 2 == 0)
             return PieceColor::WHITE;
         else

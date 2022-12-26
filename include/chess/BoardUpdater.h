@@ -12,11 +12,12 @@ namespace chess {
         static void applyMoveToBoard(Move move, Board& board);
         static void revertMoveFromBoard(Move move, Board& board);
     public:        
-        Board previewMove(Move move);
+        Board previewMove(Move move) const;
         void revertMove();
         void executeMove(Move move);
         std::vector<Move> getHistory() const;
-        PieceColor getTurnColor();
+        PieceColor getTurnColor() const;
+        Board getBoard() const;
     };
 }
 

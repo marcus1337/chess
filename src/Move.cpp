@@ -95,4 +95,8 @@ namespace chess {
         return fromPiece.getType() == PieceType::PAWN && from.file == to.file;
     }
 
+    bool Move::isPawnDoublePush() const {
+        return isPawnPush() && std::abs(from.rank - to.rank) == 2;
+    }
+
 }

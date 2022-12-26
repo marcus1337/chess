@@ -2,14 +2,13 @@
 
 namespace chess {
 
-    MoveValidator::MoveValidator(const Board& _board, const std::vector<Move>& _moveHistory) : board(_board), moveHistory(_moveHistory), 
-        turnColor((moveHistory.size() % 2) == 0 ? PieceColor::WHITE : PieceColor::BLACK) {
+    MoveValidator::MoveValidator(const BoardUpdater& _boardUpdater) : board(_boardUpdater.getBoard()), moveHistory(_boardUpdater.getHistory()),
+        turnColor(_boardUpdater.getTurnColor()), boardUpdater(_boardUpdater) {
 
     }
 
     bool MoveValidator::isCausingSelfCheck(Move move) {
-        Board boardCopy = board;
-
+        Board boardCopy = boardUpdater.previewMove(move);
         KingThreatChecker kingThreatChecker(boardCopy, turnColor);
         return kingThreatChecker.isKingChecked();
     }
@@ -17,8 +16,15 @@ namespace chess {
     bool MoveValidator::isValidMove(const Move& move) {
         if (move.getFromPiece().getColor() != turnColor)
             return false;
- 
-        return false;
+        if (move.isKingSideCastle() && !canKingSideCastle(move))
+            return false;
+        if (move.isQueenSideCastle() && !canQueenSideCastle(move))
+            return false;
+        if (move.isEnPassant() && !canPassantTake(move))
+            return false;
+      
+
+        return !isCausingSelfCheck(move);
     }
 
     std::vector<Move> MoveValidator::getValidPromoteMoves(Move possibleMove) {
