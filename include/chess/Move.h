@@ -8,10 +8,8 @@ namespace chess {
     class Move {
 
         Point from, to;
-        Piece fromPiece, capturedPiece = Piece(PieceType::PAWN, PieceColor::WHITE);
-        PieceType promotedTo = PieceType::PAWN;
-        bool promotion = false;
-        bool capture = false;
+        Piece fromPiece, capturedPiece;
+        PieceType promotedTo;
 
         Move(Point _from, Point _to, Piece _fromPiece, PieceType _promotedTo);
         Move(Point _from, Point _to, Piece _fromPiece, Piece _capturedPiece, PieceType _promotedTo);
