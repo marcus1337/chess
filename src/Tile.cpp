@@ -2,6 +2,10 @@
 
 namespace chess {
 
+    Tile::Tile() : Tile(Point{-1, -1}) {
+
+    }
+
     Tile::Tile(Point _point) : point(_point), piece(PieceType::PAWN, PieceColor::WHITE) {
 
     }

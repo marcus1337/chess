@@ -12,6 +12,7 @@ namespace chess {
         bool occupied = false;
 
     public:
+        Tile();
         Tile(Point _point);
         bool isOccupied() const;
         void removePiece();
