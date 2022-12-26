@@ -33,6 +33,10 @@ namespace chess {
         tiles[getTileIndex(point)].setPiece(piece);
     }
 
+    void Board::removePiece(Point point) {
+        tiles[getTileIndex(point)].removePiece();
+    }
+
     void Board::reset() {
         removePieces();
         resetPawns();

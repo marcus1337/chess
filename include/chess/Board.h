@@ -20,6 +20,7 @@ namespace chess {
         Board();
         Tile getTile(Point point) const;
         Tile getTile(int file, int rank) const;
+        void removePiece(Point point);
         void setPiece(Point point, Piece piece);
         void setPiece(int file, int rank, Piece piece);
         Point getKingPoint(PieceColor kingColor) const;

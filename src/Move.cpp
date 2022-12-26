@@ -33,7 +33,7 @@ namespace chess {
     }
 
     bool Move::isCapture() const {
-        return fromPiece.getColor() != capturedPiece.getColor();
+        return fromPiece.getColor() != capturedPiece.getColor() || isEnPassant();
     }
 
     bool Move::isCastle() const {
@@ -56,11 +56,30 @@ namespace chess {
         return to;
     }
 
+    Point Move::getEnPassantCapturePoint() const {
+        Point to = getTo();
+        if (to.rank == 2)
+            return to + Point{ 0, 1 };
+        else
+            return to + Point{ 0, -1 };
+    }
+
+    Point Move::getCapturePoint() const {
+        if (isEnPassant())
+            return getEnPassantCapturePoint();
+        else
+            return getTo();
+    }
+
     Piece Move::getFromPiece() const {
         return fromPiece;
     }
 
     Piece Move::getCapturedPiece() const {
+        if (isEnPassant()) {
+            PieceColor oppositeColor = fromPiece.getColor() == PieceColor::WHITE ? PieceColor::BLACK : PieceColor::WHITE;
+            return Piece{ PieceType::PAWN, oppositeColor };
+        }
         return capturedPiece;
     }
 

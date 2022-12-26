@@ -13,6 +13,7 @@ namespace chess {
 
         Move(Point _from, Point _to, Piece _fromPiece, PieceType _promotedTo);
         Move(Point _from, Point _to, Piece _fromPiece, Piece _capturedPiece, PieceType _promotedTo);
+        Point getEnPassantCapturePoint() const;
 
     public:
 
@@ -30,6 +31,7 @@ namespace chess {
         bool isPawnPush() const;
         Point getFrom() const;
         Point getTo() const;
+        Point getCapturePoint() const;
         Piece getFromPiece() const;
         Piece getCapturedPiece() const;
         Piece getPromotePiece() const;
