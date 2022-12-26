@@ -27,6 +27,10 @@ namespace chess {
         PieceColor getColor() const;
         Piece(PieceType _type, PieceColor _color);
         std::vector<Point> getPossibleEndPoints(Point from); //Includes illegal moves.
+
+        bool operator==(const Piece& other) const {
+            return type == other.type && color == other.color;
+        }
     };
 }
 

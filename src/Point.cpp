@@ -28,4 +28,26 @@ namespace chess {
         else if (rank > goalPoint.rank)
             rank--;
     }
+
+    bool Point::isOnSameDiagonal(Point other) const {
+        return std::abs(file - other.file) == std::abs(rank - other.rank);
+    }
+
+    bool Point::isOnSameLine(Point other) const {
+        return file == other.file || rank == other.rank;
+    }
+
+    std::vector<Point> Point::getIntermediatePoints(Point other) const {
+        if ((!isOnSameDiagonal(other) && !isOnSameLine(other)) || *this == other)
+            return {};
+        std::vector<Point> midPoints;
+        Point midPoint = *this;
+        midPoint.stepTowards(other);
+        while (midPoint != other) {
+            midPoints.push_back(midPoint);
+            midPoint.stepTowards(other);
+        }
+        return midPoints;
+    }
+
 }

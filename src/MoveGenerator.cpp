@@ -18,9 +18,7 @@ namespace chess {
         }
 
         if (fromPiece.getType() != PieceType::KNIGHT) {
-            Point midPoint = fromTile.getPoint();
-            while (midPoint != to) {
-                midPoint.stepTowards(to);
+            for (Point midPoint : from.getIntermediatePoints(to)) {
                 if (board.getTile(midPoint).isOccupied())
                     return true;
             }

@@ -96,4 +96,21 @@ namespace chess {
         return occupiedTiles;
     }
 
+    std::vector<Tile> Board::getOccupiedTiles(Piece piece) const {
+        std::vector<Tile> occupiedTiles;
+        std::copy_if(tiles.begin(), tiles.end(), std::back_inserter(occupiedTiles),
+            [piece](const Tile& tile) { return tile.isOccupied() && tile.getPiece() == piece; });
+        return occupiedTiles;
+    }
+
+    std::vector<Tile> Board::getIntermediateOccupiedTiles(Point a, Point b) const {
+        std::vector<Tile> occupiedTiles;
+        for (Point midPoint : a.getIntermediatePoints(b)) {
+            Tile tile = getTile(midPoint);
+            if (tile.isOccupied())
+                occupiedTiles.push_back(tile);
+        }
+        return occupiedTiles;
+    }
+
 }

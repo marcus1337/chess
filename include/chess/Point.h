@@ -2,6 +2,7 @@
 #ifndef CHESS_POINT_H
 #define CHESS_POINT_H
 #include <string>
+#include <vector>
 
 namespace chess {
 
@@ -12,7 +13,11 @@ namespace chess {
         char getRankChar();
         std::string toString();
 
+        std::vector<Point> getIntermediatePoints(Point other) const;
         void stepTowards(Point goalPoint);
+
+        bool isOnSameDiagonal(Point other) const;
+        bool isOnSameLine(Point other) const;
 
         bool operator==(const Point& other) const {
             return file == other.file && rank == other.rank;
