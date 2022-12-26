@@ -9,12 +9,12 @@ namespace chess {
 
     class MoveGenerator {
         const Board& board;
+        bool isPathBlocked(Tile fromTile, Tile toTile);
+        Move getMove(Tile fromTile, Tile toTile);
 
     public:
         MoveGenerator(const Board& _board);
-
-        std::vector<Move> getMoves(Point from);
-
+        std::vector<Move> getPossibleMoves(Point from);
     };
 }
 

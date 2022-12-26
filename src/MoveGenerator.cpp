@@ -6,4 +6,47 @@ namespace chess {
 
     }
 
+    bool MoveGenerator::isPathBlocked(Tile fromTile, Tile toTile) {
+        Piece fromPiece = fromTile.getPiece();
+        if (toTile.isOccupied() && toTile.getPiece().getColor() == fromPiece.getColor())
+            return true;
+        if (fromPiece.getType() != PieceType::KNIGHT) {
+            Point midPoint = fromTile.getPoint();
+            Point toPoint = toTile.getPoint();
+            while (midPoint != toPoint) {
+                midPoint.stepTowards(toPoint);
+                if (board.getTile(midPoint).isOccupied())
+                    return true;
+            }
+        }
+        return false;
+    }
+
+    Move MoveGenerator::getMove(Tile fromTile, Tile toTile) {
+        bool capture = toTile.isOccupied();
+        Point from = fromTile.getPoint();
+        Point to = toTile.getPoint();
+        if (capture) {
+            return Move(from, to, fromTile.getPiece(), toTile.getPiece());
+        }
+        else {
+            return Move(from, to, fromTile.getPiece());
+        }
+    }
+
+    std::vector<Move> MoveGenerator::getPossibleMoves(Point from) {
+        Tile fromTile = board.getTile(from);
+        if (!fromTile.isOccupied())
+            return {};
+
+        std::vector<Move> possibleMoves;
+        for (Point to : fromTile.getPossibleEndPoints()) {
+            Tile toTile = board.getTile(to);
+            if (!isPathBlocked(fromTile, toTile)) {
+                possibleMoves.push_back(getMove(fromTile, toTile));
+            }
+        }
+        return possibleMoves;
+    }
+
 }

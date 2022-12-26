@@ -8,18 +8,18 @@
 namespace chess {
     class Board {
         std::array<Tile, 64> tiles;
-        int getTileIndex(Point point);
+        int getTileIndex(Point point) const;
         void reset();
         void resetPawns();
         void resetHeavyPieces();
         void resetHeavyPiece(PieceType pieceType);
-        PieceType getInitialHeavyPieceType(int file);
+        PieceType getInitialHeavyPieceType(int file) const;
         void setTilePoints();
         void removePieces();
     public:
         Board();
-        Tile getTile(Point point);
-        Tile getTile(int file, int rank);
+        Tile getTile(Point point) const;
+        Tile getTile(int file, int rank) const;
         void setPiece(Point point, Piece piece);
         void setPiece(int file, int rank, Piece piece);
     };

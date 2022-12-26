@@ -23,7 +23,7 @@ namespace chess {
         }
     }
 
-    int Board::getTileIndex(Point point) {
+    int Board::getTileIndex(Point point) const {
         return point.rank * 8 + point.file;
     }
 
@@ -48,7 +48,7 @@ namespace chess {
 
     }
 
-    PieceType Board::getInitialHeavyPieceType(int file) {
+    PieceType Board::getInitialHeavyPieceType(int file) const {
         if (file == 0 || file == 7)
             return PieceType::ROOK;
         if (file == 1 || file == 6)
@@ -67,11 +67,11 @@ namespace chess {
         }
     }
 
-    Tile Board::getTile(Point point) {
+    Tile Board::getTile(Point point) const {
         return tiles[getTileIndex(point)];
     }
 
-    Tile Board::getTile(int file, int rank) {
+    Tile Board::getTile(int file, int rank) const {
         return getTile(Point{ file, rank });
     }
 

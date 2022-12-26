@@ -12,6 +12,8 @@ namespace chess {
         char getRankChar();
         std::string toString();
 
+        void stepTowards(Point goalPoint);
+
         bool operator==(const Point& other) const {
             return file == other.file && rank == other.rank;
         }
