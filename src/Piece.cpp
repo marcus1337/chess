@@ -5,13 +5,13 @@ namespace chess {
     }
 
     std::vector<Point> Piece::getPossibleEndPoints(Point from) {
-        std::vector<Point> endPositions;
-        for (Point relativePosition : getPossibleRelativeEndPoints(type, color)) {
-            Point endPosition = from + relativePosition;
-            if (endPosition.isWithinBounds())
-                endPositions.push_back(endPosition);
+        std::vector<Point> endPoints;
+        for (Point relativeEndPoint : getPossibleRelativeEndPoints(type, color)) {
+            Point endPoint = from + relativeEndPoint;
+            if (endPoint.isWithinBounds())
+                endPoints.push_back(endPoint);
         }
-        return endPositions;
+        return endPoints;
     }
 
     std::vector<Point> Piece::getPossibleRelativeEndPoints(PieceType type, PieceColor color) {
@@ -59,15 +59,19 @@ namespace chess {
 
     std::vector<Point> Piece::getPawnPoints(PieceColor color) {
         std::vector<Point> positions;
-        std::vector <Point> promotePositions;
         if (color == PieceColor::WHITE)
             positions = { {1,1}, {0,2}, {-1,1}, {0,1} };
         else
             positions = { {1,-1}, {0,-2}, {-1,-1}, {0,-1} };
-        for (int i = 3; i <= 6; i++)
-            promotePositions = { {-1,i}, {1,i}, {0,i} };
-        positions.insert(positions.end(), promotePositions.begin(), promotePositions.end());
         return positions;
+    }
+
+    PieceType Piece::getType() const {
+        return type;
+    }
+
+    PieceColor Piece::getColor() const {
+        return color;
     }
 
 }

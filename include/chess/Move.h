@@ -8,15 +8,22 @@ namespace chess {
     class Move {
 
         Point from, to;
+        Piece movedPiece, capturedPiece;
+        
+        static bool isPromoteMove(Point endPoint, Piece piece);
+        static std::vector<Move> getPromoteMoves(Point from, Point to, Piece piece);
 
     public:
+
+        Move(Point _from, Point _to);
+
+        bool isLegal(); //board input parameter
 
         void execute();
         void revert();
 
-        bool isPromoting();
         Point getFrom();
-        Point getTo(); //returns actual end-position for new pieces -- special to-moves are modified before return.
+        Point getTo();
 
     };
 }
