@@ -25,7 +25,7 @@ namespace chess {
         return shouldBePromotion() && promotedTo != PieceType::PAWN && promotedTo != PieceType::KING;
     }
 
-    std::vector<Move> Move::getPromoteMoves(Move pawnMove) {
+    std::vector<Move> Move::getPromoteMoves() {
         return {Move(from, to, fromPiece, capturedPiece, PieceType::KNIGHT),
             Move(from, to, fromPiece, capturedPiece, PieceType::BISHOP),
             Move(from, to, fromPiece, capturedPiece, PieceType::ROOK),

@@ -19,7 +19,7 @@ namespace chess {
         Move(Point _from, Point _to, Piece _fromPiece);
         Move(Point _from, Point _to, Piece _fromPiece, Piece _capturedPiece);
         
-        std::vector<Move> getPromoteMoves(Move pawnMove);
+        std::vector<Move> getPromoteMoves();
         bool shouldBePromotion();
         bool isPromotion();
         bool isCapture();
