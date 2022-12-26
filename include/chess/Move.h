@@ -8,22 +8,31 @@ namespace chess {
     class Move {
 
         Point from, to;
-        Piece movedPiece, capturedPiece;
-        
-        static bool isPromoteMove(Point endPoint, Piece piece);
-        static std::vector<Move> getPromoteMoves(Point from, Point to, Piece piece);
+        Piece fromPiece, capturedPiece = Piece(PieceType::PAWN, PieceColor::WHITE);
+        PieceType promotedTo = PieceType::PAWN;
+        bool promotion = false;
+        bool capture = false;
+
+        Move(Point _from, Point _to, Piece _fromPiece, PieceType _promotedTo);
+        Move(Point _from, Point _to, Piece _fromPiece, Piece _capturedPiece, PieceType _promotedTo);
 
     public:
 
-        Move(Point _from, Point _to);
-
-        bool isLegal(); //board input parameter
-
-        void execute();
-        void revert();
-
+        Move(Point _from, Point _to, Piece _fromPiece);
+        Move(Point _from, Point _to, Piece _fromPiece, Piece _capturedPiece);
+        
+        std::vector<Move> getPromoteMoves(Move pawnMove);
+        bool shouldBePromotion();
+        bool isPromotion();
+        bool isCapture();
+        bool isCastle();
+        bool isKingSideCastle();
+        bool isQueenSideCastle();        
         Point getFrom();
         Point getTo();
+        Piece getFromPiece();
+        Piece getCapturedPiece();
+        Piece getPromotePiece();
 
     };
 }

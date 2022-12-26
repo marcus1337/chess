@@ -4,7 +4,6 @@
 
 #include "Point.h"
 #include "Piece.h"
-#include "Move.h"
 
 namespace chess {
     class Tile {
