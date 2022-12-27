@@ -15,6 +15,7 @@ namespace chess {
         const PieceColor turnColor;
         const KingThreatChecker kingThreatChecker;
 
+        bool isPieceMoved(int startFile, PieceType pieceType);
         bool isKingMoved();
         bool isQueenSideRookMoved();
         bool isKingSideRookMoved();

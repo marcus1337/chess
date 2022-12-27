@@ -15,6 +15,7 @@ namespace chess {
         Tile();
         Tile(Point _point);
         bool isOccupied() const;
+        bool contains(Piece _piece) const;
         void removePiece();
         void setPiece(Piece _piece);
         Piece getPiece() const;

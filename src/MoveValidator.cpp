@@ -13,21 +13,36 @@ namespace chess {
         return tempKingThreatChecker.isKingChecked();
     }
 
-    bool MoveValidator::isKingMoved() {
-
+    bool MoveValidator::isPieceMoved(int startFile, PieceType pieceType) {
+        int rank = turnColor == PieceColor::WHITE ? 0 : 7;
+        Piece piece = Piece{ pieceType, turnColor };
+        Point startPoint = Point{ startFile, rank };
+        if (!board.getTile(startPoint).contains(piece))
+            return true;
+        for (const Move& move : moveHistory) {
+            if (move.getFrom() == startPoint)
+                return true;
+        }
         return false;
+    }
+
+    bool MoveValidator::isKingMoved() {
+        return isPieceMoved(5, PieceType::KING);
     }
     bool MoveValidator::isQueenSideRookMoved() {
-
-        return false;
+        return isPieceMoved(0, PieceType::ROOK);
     }
     bool MoveValidator::isKingSideRookMoved() {
-
-        return false;
+        return isPieceMoved(7, PieceType::ROOK);
     }
 
     bool MoveValidator::canPassantTake(Move move) {
-        return false;
+        if (moveHistory.empty())
+            return false;
+        Move lastMove = moveHistory.back();
+        if (!lastMove.isPawnDoublePush() || lastMove.getTo().file != move.getTo().file)
+            return false;
+        return move.getTo().rank == 2 || move.getTo().rank == 5;
     }
 
     bool MoveValidator::canKingSideCastle(Move move) {

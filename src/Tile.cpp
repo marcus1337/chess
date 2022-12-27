@@ -12,6 +12,10 @@ namespace chess {
     bool Tile::isOccupied() const {
         return occupied;
     }
+    bool Tile::contains(Piece _piece) const {
+        return isOccupied() && getPiece() == _piece;
+    }
+
     void Tile::removePiece() {
         occupied = false;
     }
