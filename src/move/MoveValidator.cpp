@@ -1,4 +1,4 @@
-#include "chess/MoveValidator.h"
+#include "chess/move/MoveValidator.h"
 
 namespace chess {
 

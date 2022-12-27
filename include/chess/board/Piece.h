@@ -2,7 +2,7 @@
 #ifndef CHESS_PIECE_H
 #define CHESS_PIECE_H
 
-#include "chess/Point.h"
+#include "chess/board/Point.h"
 #include <vector>
 #include <map>
 #include <utility>

@@ -1,8 +1,9 @@
 
 #ifndef CHESS_BOARDUPDATER_H
 #define CHESS_BOARDUPDATER_H
-#include "Move.h"
-#include "Board.h"
+
+#include "chess/board/Board.h"
+#include "chess/move/Move.h"
 
 namespace chess {
     class BoardUpdater {

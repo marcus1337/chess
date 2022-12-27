@@ -3,9 +3,9 @@
 #define CHESS_MOVEVALIDATOR_H
 
 #include "Move.h"
-#include "Board.h"
-#include "KingThreatChecker.h"
-#include "BoardUpdater.h"
+#include "chess/board/Board.h"
+#include "chess/KingThreatChecker.h"
+#include "chess/board/BoardUpdater.h"
 
 namespace chess {
     class MoveValidator {

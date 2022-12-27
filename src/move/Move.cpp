@@ -1,5 +1,5 @@
 
-#include "chess/Move.h"
+#include "chess/move/Move.h"
 
 namespace chess {
 

@@ -1,4 +1,4 @@
-#include "chess/MoveGenerator.h"
+#include "chess/move/MoveGenerator.h"
 
 namespace chess {
 

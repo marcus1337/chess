@@ -1,4 +1,4 @@
-#include "chess/Point.h"
+#include "chess/board/Point.h"
 
 namespace chess {
 

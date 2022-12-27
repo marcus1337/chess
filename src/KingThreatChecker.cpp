@@ -1,5 +1,5 @@
 #include "chess/KingThreatChecker.h"
-#include "chess/MoveGenerator.h"
+#include "chess/move/MoveGenerator.h"
 
 namespace chess {
     KingThreatChecker::KingThreatChecker(const Board& _board, PieceColor _kingColor) : board(_board), kingColor(_kingColor), checkedPoints{}, //checkBlockingPoints{}, 

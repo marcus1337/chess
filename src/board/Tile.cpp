@@ -1,4 +1,4 @@
-#include "chess/Tile.h"
+#include "chess/board/Tile.h"
 
 namespace chess {
 

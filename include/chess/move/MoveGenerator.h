@@ -2,7 +2,7 @@
 #ifndef CHESS_MOVEGENERATOR_H
 #define CHESS_MOVEGENERATOR_H
 
-#include "Board.h"
+#include "chess/board/Board.h"
 #include "Move.h"
 
 namespace chess {

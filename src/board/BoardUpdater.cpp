@@ -1,4 +1,4 @@
-#include "chess/BoardUpdater.h"
+#include "chess/board/BoardUpdater.h"
 
 namespace chess {
 

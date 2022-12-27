@@ -1,4 +1,4 @@
-#include "chess/Board.h"
+#include "chess/board/Board.h"
 #include <algorithm>
 #include <iterator>
 

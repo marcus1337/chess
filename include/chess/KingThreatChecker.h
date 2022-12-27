@@ -2,7 +2,7 @@
 #ifndef CHESS_KINGTHREATCHECKER_H
 #define CHESS_KINGTHREATCHECKER_H
 
-#include "Board.h"
+#include "chess/board/Board.h"
 
 namespace chess {
     class KingThreatChecker {

@@ -1,4 +1,4 @@
-#include "chess/Piece.h"
+#include "chess/board/Piece.h"
 
 namespace chess {
     Piece::Piece(PieceType _type, PieceColor _color) : type(_type), color(_color) {

@@ -1,8 +1,8 @@
 
 #ifndef CHESS_MOVE_H
 #define CHESS_MOVE_H
-#include "Point.h"
-#include "Piece.h"
+#include "chess/board/Point.h"
+#include "chess/board/Piece.h"
 
 namespace chess {
     class Move {
