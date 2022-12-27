@@ -4,16 +4,13 @@
 
 #include "Move.h"
 #include "chess/board/Board.h"
-#include "chess/KingThreatChecker.h"
+#include "chess/status/KingThreatChecker.h"
 #include "chess/board/BoardUpdater.h"
 
 namespace chess {
     class MoveValidator {
         const BoardUpdater& boardUpdater;
-        const Board board;
-        const std::vector<Move> moveHistory;
-        const PieceColor turnColor;
-        const KingThreatChecker kingThreatChecker;
+        const Board& board;
 
         bool isPieceMoved(int startFile, PieceType pieceType);
         bool isKingMoved();
@@ -27,10 +24,10 @@ namespace chess {
         bool isCausingSelfCheck(Move move);
 
         std::vector<Move> getValidPromoteMoves(Move possibleMove);
+        bool isValidMove(const Move& possibleMove);
 
     public:
         MoveValidator(const BoardUpdater& _boardUpdater);
-        bool isValidMove(const Move& possibleMove);
         std::vector<Move> getValidMoves(const std::vector<Move>& possibleMoves);
     };
 }

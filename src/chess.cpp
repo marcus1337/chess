@@ -2,5 +2,8 @@
 
 namespace chess {
 
+    Chess::Chess() : moveFinder(boardUpdater), status(boardUpdater) {
+
+    }
 
 }

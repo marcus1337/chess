@@ -8,7 +8,7 @@ namespace chess {
         return boardCopy;
     }
 
-    Board BoardUpdater::getBoard() const {
+    const Board& BoardUpdater::getBoard() const {
         return board;
     }
 
@@ -50,22 +50,22 @@ namespace chess {
     }
 
     void BoardUpdater::revertMove() {
-        Move lastMove = history.back();
+        Move lastMove = history.getLastMove();
         revertMoveFromBoard(lastMove, board);
-        history.pop_back();
+        history.removeLastState();
     }
 
     void BoardUpdater::executeMove(Move move) {
         applyMoveToBoard(move, board);
-        history.push_back(move);
+        history.addState(move, board);
     }
 
-    std::vector<Move> BoardUpdater::getHistory() const {
+    const History& BoardUpdater::getHistory() const {
         return history;
     }
 
     PieceColor BoardUpdater::getTurnColor() const {
-        if (history.size() % 2 == 0)
+        if (history.getMoves().size() % 2 == 0)
             return PieceColor::WHITE;
         else
             return PieceColor::BLACK;

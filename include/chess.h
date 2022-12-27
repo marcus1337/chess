@@ -4,24 +4,22 @@
 
 #include "chess/board/BoardUpdater.h"
 #include "chess/move/Move.h"
+#include "chess/move/MoveFinder.h"
+#include "chess/status/GameStatus.h"
 
 namespace chess {
     class Chess {
 
         BoardUpdater boardUpdater;
+        MoveFinder moveFinder;
 
     public:
 
+        Chess();
+        GameStatus status;
+
         Board getBoard();
         void reset();
-        bool isGameOver();
-        bool isDraw();
-        bool isCheckMate();
-        bool isCheck();
-        bool isWhitePlayerTurn();
-        bool canClaimDrawByRepetition();
-        void claimDrawByRepetition();
-
         std::vector<Move> getMoves(Point from);
         std::vector<Move> getMoveHistory();
         void executeMove(Move move);

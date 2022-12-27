@@ -4,11 +4,12 @@
 
 #include "chess/board/Board.h"
 #include "chess/move/Move.h"
+#include "chess/status/History.h"
 
 namespace chess {
     class BoardUpdater {
         Board board;
-        std::vector<Move> history;
+        History history;
 
         static void applyCastlingToBoard(Move move, Board& board);
         static void applyMoveToBoard(Move move, Board& board);
@@ -18,9 +19,9 @@ namespace chess {
         Board previewMove(Move move) const;
         void revertMove();
         void executeMove(Move move);
-        std::vector<Move> getHistory() const;
+        const History& getHistory() const;
         PieceColor getTurnColor() const;
-        Board getBoard() const;
+        const Board& getBoard() const;
     };
 }
 
