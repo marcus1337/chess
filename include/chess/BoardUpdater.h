@@ -9,8 +9,10 @@ namespace chess {
         Board board;
         std::vector<Move> history;
 
+        static void applyCastlingToBoard(Move move, Board& board);
         static void applyMoveToBoard(Move move, Board& board);
         static void revertMoveFromBoard(Move move, Board& board);
+        static void revertCastledRookFromBoard(Move move, Board& board);
     public:        
         Board previewMove(Move move) const;
         void revertMove();

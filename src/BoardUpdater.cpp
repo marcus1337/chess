@@ -17,31 +17,36 @@ namespace chess {
         board.removePiece(move.getFrom());
         if(move.isCapture())
             board.removePiece(move.getCapturePoint());
+        if (move.isCastle())
+            applyCastlingToBoard(move, board);
+    }
+
+    void BoardUpdater::applyCastlingToBoard(Move move, Board& board) {
+        Piece rook = Piece{ PieceType::ROOK, move.getFromPiece().getColor() };
         PieceColor color = move.getFromPiece().getColor();
         if (move.isKingSideCastle())
-            board.setPiece(move.getFrom() + Point{ 1,0 }, Piece{ PieceType::ROOK, color });
+            board.setPiece(move.getFrom() + Point{ 1,0 }, rook);
         else if (move.isQueenSideCastle())
-            board.setPiece(move.getFrom() + Point{ -1,0 }, Piece{ PieceType::ROOK, color });
+            board.setPiece(move.getFrom() + Point{ -1,0 }, rook);
     }
 
     void BoardUpdater::revertMoveFromBoard(Move move, Board& board) {
         board.removePiece(move.getTo());
-        if (move.isCapture()) {
-            Point capturePoint = move.getCapturePoint();
-            Piece capturedPiece = move.getCapturedPiece();
-            board.setPiece(capturePoint, capturedPiece); 
-        }
+        if (move.isCapture())
+            board.setPiece(move.getCapturePoint(), move.getCapturedPiece());
         board.setPiece(move.getFrom(), move.getFromPiece());
+        if (move.isCastle())
+            revertCastledRookFromBoard(move, board);
+    }
+
+    void BoardUpdater::revertCastledRookFromBoard(Move move, Board& board) {
         PieceColor color = move.getFromPiece().getColor();
-        int fromRank = move.getFrom().rank;
-        if (move.isKingSideCastle()) {
-            board.removePiece(move.getFrom() + Point{ 1,0 });
-            board.setPiece(Point{ 7, fromRank }, Piece{ PieceType::ROOK, color });
-        }
-        else if (move.isQueenSideCastle()) {
-            board.removePiece(move.getFrom() + Point{ -1,0 });
-            board.setPiece(Point{ 0, fromRank }, Piece{ PieceType::ROOK, color });
-        }
+        int rank = move.getFrom().rank;
+        Piece rook = Piece{ PieceType::ROOK, color };
+        Point rookStartPoint = move.isKingSideCastle() ? Point{ 0, rank } : Point{ 7, rank };
+        Point rookEndPoint = move.isKingSideCastle() ? move.getFrom() + Point{ 1,0 } : move.getFrom() + Point{ -1,0 };
+        board.removePiece(rookEndPoint);
+        board.setPiece(rookStartPoint, rook);
     }
 
     void BoardUpdater::revertMove() {
