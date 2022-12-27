@@ -7,13 +7,13 @@ namespace chess {
 
     }
 
-    bool MoveValidator::isCausingSelfCheck(Move move) {
+    bool MoveValidator::isCausingSelfCheck(Move move) const {
         Board boardCopy = boardUpdater.previewMove(move);
         KingThreatChecker tempKingThreatChecker(boardCopy, boardUpdater.getTurnColor());
         return tempKingThreatChecker.isKingChecked();
     }
 
-    bool MoveValidator::isPieceMoved(int startFile, PieceType pieceType) {
+    bool MoveValidator::isPieceMoved(int startFile, PieceType pieceType) const {
         int rank = boardUpdater.getTurnColor() == PieceColor::WHITE ? 0 : 7;
         Piece piece = Piece{ pieceType, boardUpdater.getTurnColor() };
         Point startPoint = Point{ startFile, rank };
@@ -26,17 +26,17 @@ namespace chess {
         return false;
     }
 
-    bool MoveValidator::isKingMoved() {
+    bool MoveValidator::isKingMoved() const {
         return isPieceMoved(5, PieceType::KING);
     }
-    bool MoveValidator::isQueenSideRookMoved() {
+    bool MoveValidator::isQueenSideRookMoved() const {
         return isPieceMoved(0, PieceType::ROOK);
     }
-    bool MoveValidator::isKingSideRookMoved() {
+    bool MoveValidator::isKingSideRookMoved() const {
         return isPieceMoved(7, PieceType::ROOK);
     }
 
-    bool MoveValidator::canPassantTake(Move move) {
+    bool MoveValidator::canPassantTake(Move move) const {
         auto moveHistory = boardUpdater.getHistory().getMoves();
         if (moveHistory.empty())
             return false;
@@ -46,7 +46,7 @@ namespace chess {
         return move.getTo().rank == 2 || move.getTo().rank == 5;
     }
 
-    bool MoveValidator::canKingSideCastle(Move move) {
+    bool MoveValidator::canKingSideCastle(Move move) const {
         KingThreatChecker kingThreatChecker(board, boardUpdater.getTurnColor());
         if (isKingMoved() || isKingSideRookMoved())
             return false;
@@ -59,7 +59,7 @@ namespace chess {
         return true;
     }
 
-    bool MoveValidator::canQueenSideCastle(Move move) {
+    bool MoveValidator::canQueenSideCastle(Move move) const {
         KingThreatChecker kingThreatChecker(board, boardUpdater.getTurnColor());
         if (isKingMoved() || isQueenSideRookMoved())
             return false;
@@ -72,12 +72,12 @@ namespace chess {
         return true;
     }
 
-    bool MoveValidator::canPawnDoublePush(Move move) {
+    bool MoveValidator::canPawnDoublePush(Move move) const {
         return (move.getFrom().rank == 1 && move.getFromPiece().getColor() == PieceColor::WHITE) ||
             (move.getFrom().rank == 6 && move.getFromPiece().getColor() == PieceColor::BLACK);
     }
 
-    bool MoveValidator::isValidMove(const Move& move) {
+    bool MoveValidator::isValidMove(const Move& move) const {
         if (move.getFromPiece().getColor() != boardUpdater.getTurnColor())
             return false;
         if (move.isKingSideCastle() && !canKingSideCastle(move))
@@ -89,7 +89,7 @@ namespace chess {
         return !isCausingSelfCheck(move);
     }
 
-    std::vector<Move> MoveValidator::getValidPromoteMoves(Move possibleMove) {
+    std::vector<Move> MoveValidator::getValidPromoteMoves(Move possibleMove) const {
         std::vector<Move> validMoves;
         if (!possibleMove.isPromotion() && possibleMove.shouldBePromotion()) {
             for (const Move& promoteMove : possibleMove.getPromoteMoves()) {
@@ -101,7 +101,7 @@ namespace chess {
         return validMoves;
     }
 
-    std::vector<Move> MoveValidator::getValidMoves(const std::vector<Move>& possibleMoves) {
+    std::vector<Move> MoveValidator::getValidMoves(const std::vector<Move>& possibleMoves) const {
         std::vector<Move> validMoves;
         for (const Move& possibleMove : possibleMoves) {
             for (const Move& validPromoteMove : getValidPromoteMoves(possibleMove))

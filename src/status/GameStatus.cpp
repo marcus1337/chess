@@ -1,28 +1,29 @@
 #include "chess/status/GameStatus.h"
+#include "chess/status/KingThreatChecker.h"
 
 namespace chess {
 
-    GameStatus::GameStatus(const BoardUpdater& _boardUpdater) : boardUpdater(_boardUpdater) {
+    GameStatus::GameStatus(const BoardUpdater& _boardUpdater, const MoveFinder& _moveFinder) : boardUpdater(_boardUpdater), moveFinder(_moveFinder) {
 
     }
 
     void GameStatus::update() {
-        whitePlayerTurn = boardUpdater.getTurnColor() == PieceColor::WHITE;
         setCheck();
         setCheckMate();
         setStaleMate();
     }
 
     void GameStatus::setCheck() {
-        check = false;
+        KingThreatChecker kingThreatChecker(boardUpdater.getBoard(), boardUpdater.getTurnColor());
+        check = kingThreatChecker.isKingChecked();
     }
 
     void GameStatus::setCheckMate() {
-        checkMate = false;
+        checkMate = isCheck() && moveFinder.getMoves().empty();
     }
 
     void GameStatus::setStaleMate() {
-        staleMate = false;
+        staleMate = !isCheck() && moveFinder.getMoves().empty();
     }
 
     bool GameStatus::isGameOver() {
@@ -42,7 +43,7 @@ namespace chess {
     }
 
     bool GameStatus::isWhitePlayerTurn() {
-        return whitePlayerTurn;
+        return boardUpdater.getTurnColor() == PieceColor::WHITE;
     }
 
 }

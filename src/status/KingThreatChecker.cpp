@@ -37,35 +37,3 @@ namespace chess {
 
 }
 
-
-/*std::vector<Tile> KingThreatChecker::getLongRangeThreatTiles() {
-    std::vector<Tile> tiles;
-    Point kingPoint = board.getKingPoint(kingColor);
-
-    for (const Tile& tile : board.getOccupiedTiles(Piece{ PieceType::BISHOP, attackColor })) {
-        if (tile.getPoint().isOnSameDiagonal(kingPoint))
-            tiles.push_back(tile);
-    }
-    for (const Tile& tile : board.getOccupiedTiles(Piece{ PieceType::ROOK, attackColor })) {
-        if (tile.getPoint().isOnSameLine(kingPoint))
-            tiles.push_back(tile);
-    }
-    for (const Tile& tile : board.getOccupiedTiles(Piece{ PieceType::QUEEN, attackColor })) {
-        Point tilePoint = tile.getPoint();
-        if (tilePoint.isOnSameLine(kingPoint) || tilePoint.isOnSameDiagonal(kingPoint))
-            tiles.push_back(tile);
-    }
-    return tiles;
-}
-
-void KingThreatChecker::setBlockingCheckPoints() {
-    Point kingPoint = board.getKingPoint(kingColor);
-
-    for (const Tile& tile : getLongRangeThreatTiles()) {
-        std::vector<Tile> midTiles = board.getIntermediateOccupiedTiles(kingPoint, tile.getPoint());
-        if (midTiles.size() == 1) {
-            Point midPoint = midTiles[0].getPoint();
-            checkBlockingPoints[midPoint.file][midPoint.rank] = true;
-        }
-    }
-}*/

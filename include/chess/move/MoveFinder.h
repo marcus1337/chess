@@ -15,7 +15,8 @@ namespace chess {
     public:
 
         MoveFinder(const BoardUpdater& _boardUpdater);
-        std::vector<Move> getMoves(Point from);
+        std::vector<Move> getMoves() const;
+        std::vector<Move> getMoves(Point from) const;
 
     };
 }

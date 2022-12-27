@@ -12,23 +12,23 @@ namespace chess {
         const BoardUpdater& boardUpdater;
         const Board& board;
 
-        bool isPieceMoved(int startFile, PieceType pieceType);
-        bool isKingMoved();
-        bool isQueenSideRookMoved();
-        bool isKingSideRookMoved();
+        bool isPieceMoved(int startFile, PieceType pieceType) const;
+        bool isKingMoved() const;
+        bool isQueenSideRookMoved() const;
+        bool isKingSideRookMoved() const;
 
-        bool canPassantTake(Move move);
-        bool canKingSideCastle(Move move);
-        bool canQueenSideCastle(Move move);
-        bool canPawnDoublePush(Move move);
-        bool isCausingSelfCheck(Move move);
+        bool canPassantTake(Move move) const;
+        bool canKingSideCastle(Move move) const;
+        bool canQueenSideCastle(Move move) const;
+        bool canPawnDoublePush(Move move) const;
+        bool isCausingSelfCheck(Move move) const;
 
-        std::vector<Move> getValidPromoteMoves(Move possibleMove);
-        bool isValidMove(const Move& possibleMove);
+        std::vector<Move> getValidPromoteMoves(Move possibleMove) const;
+        bool isValidMove(const Move& possibleMove) const;
 
     public:
         MoveValidator(const BoardUpdater& _boardUpdater);
-        std::vector<Move> getValidMoves(const std::vector<Move>& possibleMoves);
+        std::vector<Move> getValidMoves(const std::vector<Move>& possibleMoves) const;
     };
 }
 

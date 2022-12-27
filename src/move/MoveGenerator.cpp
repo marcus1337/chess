@@ -6,7 +6,7 @@ namespace chess {
 
     }
 
-    bool MoveGenerator::isCastlingBlocked(Move castleMove) {
+    bool MoveGenerator::isCastlingBlocked(Move castleMove) const {
         int rank = castleMove.getFrom().rank;
         std::vector<Tile> midTiles;
         if (castleMove.isQueenSideCastle())
@@ -16,7 +16,7 @@ namespace chess {
         return !midTiles.empty();
     }
 
-    bool MoveGenerator::isPathBlocked(Tile fromTile, Tile toTile) {
+    bool MoveGenerator::isPathBlocked(Tile fromTile, Tile toTile) const {
         Piece fromPiece = fromTile.getPiece();
         if (toTile.isOccupied() && toTile.getPiece().getColor() == fromPiece.getColor())
             return true;
@@ -36,7 +36,7 @@ namespace chess {
         return false;
     }
 
-    Move MoveGenerator::getMove(Tile fromTile, Tile toTile) {
+    Move MoveGenerator::getMove(Tile fromTile, Tile toTile) const {
         bool capture = toTile.isOccupied();
         Point from = fromTile.getPoint();
         Point to = toTile.getPoint();
@@ -48,7 +48,7 @@ namespace chess {
         }
     }
 
-    std::vector<Move> MoveGenerator::getPossibleMoves(Point from) {
+    std::vector<Move> MoveGenerator::getPossibleMoves(Point from) const {
         Tile fromTile = board.getTile(from);
         if (!fromTile.isOccupied())
             return {};

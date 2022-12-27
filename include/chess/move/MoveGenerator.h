@@ -9,13 +9,13 @@ namespace chess {
 
     class MoveGenerator {
         const Board& board;
-        bool isPathBlocked(Tile fromTile, Tile toTile);
-        bool isCastlingBlocked(Move castleMove);
-        Move getMove(Tile fromTile, Tile toTile);
+        bool isPathBlocked(Tile fromTile, Tile toTile) const;
+        bool isCastlingBlocked(Move castleMove) const;
+        Move getMove(Tile fromTile, Tile toTile) const;
 
     public:
         MoveGenerator(const Board& _board);
-        std::vector<Move> getPossibleMoves(Point from);
+        std::vector<Move> getPossibleMoves(Point from) const;
     };
 }
 

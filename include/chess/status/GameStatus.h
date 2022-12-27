@@ -5,7 +5,7 @@
 
 #include "chess/move/Move.h"
 #include "chess/board/BoardUpdater.h"
-
+#include "chess/move/MoveFinder.h"
 
 //TODO add setThreeFoldRepetition
 namespace chess {
@@ -15,15 +15,15 @@ namespace chess {
         bool staleMate = false;
         bool checkMate = false;
         bool check = false;
-        bool whitePlayerTurn = true;
         const BoardUpdater& boardUpdater;
+        const MoveFinder& moveFinder;
 
         void setCheck();
         void setCheckMate();
         void setStaleMate();
     
     public:
-        GameStatus(const BoardUpdater& _boardUpdater);
+        GameStatus(const BoardUpdater& _boardUpdater, const MoveFinder& _moveFinder);
         void update();
         bool isGameOver();
         bool isCheckMate();
