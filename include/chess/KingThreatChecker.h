@@ -11,16 +11,16 @@ namespace chess {
         const PieceColor attackColor;
 
         std::array<std::array<bool, 8>, 8> checkedPoints;
-        std::array<std::array<bool, 8>, 8> checkBlockingPoints;
+        //std::array<std::array<bool, 8>, 8> checkBlockingPoints;
         void setCheckedPoints();
-        void setBlockingCheckPoints();
-        std::vector<Tile> getLongRangeThreatTiles();
+        //void setBlockingCheckPoints();
+        //std::vector<Tile> getLongRangeThreatTiles();
 
     public:
         KingThreatChecker(const Board& _board, PieceColor _kingColor);
-        bool isKingChecked();
-        bool isPointChecked(Point point);
-        bool isPointBlockingCheck(Point point);
+        bool isKingChecked() const;
+        bool isPointChecked(Point point) const;
+        //bool isPointBlockingCheck(Point point) const;
     };
 }
 

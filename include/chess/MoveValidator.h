@@ -13,6 +13,11 @@ namespace chess {
         const Board board;
         const std::vector<Move> moveHistory;
         const PieceColor turnColor;
+        const KingThreatChecker kingThreatChecker;
+
+        bool isKingMoved();
+        bool isQueenSideRookMoved();
+        bool isKingSideRookMoved();
 
         bool canPassantTake(Move move);
         bool canKingSideCastle(Move move);

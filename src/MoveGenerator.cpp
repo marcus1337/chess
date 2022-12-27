@@ -6,6 +6,16 @@ namespace chess {
 
     }
 
+    bool MoveGenerator::isCastlingBlocked(Move castleMove) {
+        int rank = castleMove.getFrom().rank;
+        std::vector<Tile> midTiles;
+        if (castleMove.isQueenSideCastle())
+            midTiles = board.getIntermediateOccupiedTiles(castleMove.getFrom(), Point{ 0, rank });
+        if (castleMove.isKingSideCastle())
+            midTiles = board.getIntermediateOccupiedTiles(castleMove.getFrom(), Point{ 7, rank });
+        return !midTiles.empty();
+    }
+
     bool MoveGenerator::isPathBlocked(Tile fromTile, Tile toTile) {
         Piece fromPiece = fromTile.getPiece();
         if (toTile.isOccupied() && toTile.getPiece().getColor() == fromPiece.getColor())
@@ -47,7 +57,9 @@ namespace chess {
         for (Point to : fromTile.getPossibleEndPoints()) {
             Tile toTile = board.getTile(to);
             if (!isPathBlocked(fromTile, toTile)) {
-                possibleMoves.push_back(getMove(fromTile, toTile));
+                Move move = getMove(fromTile, toTile);
+                if(!(move.isCastle() && isCastlingBlocked(move)))
+                    possibleMoves.push_back(move);
             }
         }
         return possibleMoves;

@@ -10,6 +10,7 @@ namespace chess {
     class MoveGenerator {
         const Board& board;
         bool isPathBlocked(Tile fromTile, Tile toTile);
+        bool isCastlingBlocked(Move castleMove);
         Move getMove(Tile fromTile, Tile toTile);
 
     public:

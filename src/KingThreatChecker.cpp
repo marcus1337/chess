@@ -5,7 +5,7 @@ namespace chess {
     KingThreatChecker::KingThreatChecker(const Board& _board, PieceColor _kingColor) : board(_board), kingColor(_kingColor), checkedPoints{}, checkBlockingPoints{}, 
         attackColor(_kingColor == PieceColor::WHITE ? PieceColor::BLACK : PieceColor::WHITE) {
         setCheckedPoints();
-        setBlockingCheckPoints();
+        //setBlockingCheckPoints();
     }
 
     void KingThreatChecker::setCheckedPoints() {
@@ -20,7 +20,7 @@ namespace chess {
         }
     }
 
-    std::vector<Tile> KingThreatChecker::getLongRangeThreatTiles() {
+    /*std::vector<Tile> KingThreatChecker::getLongRangeThreatTiles() {
         std::vector<Tile> tiles;
         Point kingPoint = board.getKingPoint(kingColor);
 
@@ -50,20 +50,20 @@ namespace chess {
                 checkBlockingPoints[midPoint.file][midPoint.rank] = true;
             }
         }
-    }
+    }*/
 
-    bool KingThreatChecker::isKingChecked() {
+    bool KingThreatChecker::isKingChecked() const {
         Point kingPoint = board.getKingPoint(kingColor);
         return checkedPoints[kingPoint.file][kingPoint.rank];
     }
 
-    bool KingThreatChecker::isPointChecked(Point point) {
+    bool KingThreatChecker::isPointChecked(Point point) const {
         return checkedPoints[point.file][point.rank];
     }
 
-    bool KingThreatChecker::isPointBlockingCheck(Point point) {
+    /*bool KingThreatChecker::isPointBlockingCheck(Point point) const {
         return checkBlockingPoints[point.file][point.rank];
-    }
+    }*/
 
 }
 
