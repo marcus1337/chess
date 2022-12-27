@@ -70,4 +70,9 @@ namespace chess {
         else
             return PieceColor::BLACK;
     }
+
+    void BoardUpdater::reset() {
+        board.reset();
+        history.clear();
+    }
 }

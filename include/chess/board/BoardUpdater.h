@@ -22,6 +22,7 @@ namespace chess {
         const History& getHistory() const;
         PieceColor getTurnColor() const;
         const Board& getBoard() const;
+        void reset();
     };
 }
 

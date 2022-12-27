@@ -9,7 +9,6 @@ namespace chess {
     class Board {
         std::array<Tile, 64> tiles;
         int getTileIndex(Point point) const;
-        void reset();
         void resetPawns();
         void resetHeavyPieces();
         void resetHeavyPiece(PieceType pieceType);
@@ -18,6 +17,7 @@ namespace chess {
         void removePieces();
     public:
         Board();
+        void reset();
         Tile getTile(Point point) const;
         Tile getTile(int file, int rank) const;
         void removePiece(Point point);

@@ -7,7 +7,8 @@ add_library(${PROJECT_NAME} STATIC "src/chess.cpp"
 "src/board/Tile.cpp" "src/board/Point.cpp" "src/NotationInterpreter.cpp" 
 "src/board/Piece.cpp" "src/move/Move.cpp" "src/move/MoveValidator.cpp" 
 "src/board/Board.cpp" "src/move/MoveGenerator.cpp" "src/status/KingThreatChecker.cpp" 
-"src/board/BoardUpdater.cpp" "src/status/GameStatus.cpp" "include/chess/move/MoveFinder.h" "src/move/MoveFinder.cpp" "include/chess/status/History.h" "src/status/History.cpp")
+"src/board/BoardUpdater.cpp" "src/status/GameStatus.cpp" 
+"src/move/MoveFinder.cpp" "include/chess/status/History.h" "src/status/History.cpp")
 
 target_include_directories(${PROJECT_NAME}
   PUBLIC

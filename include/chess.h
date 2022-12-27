@@ -16,7 +16,7 @@ namespace chess {
     public:
 
         Chess();
-        GameStatus status;
+        GameStatus gameStatus;
 
         Board getBoard();
         void reset();
